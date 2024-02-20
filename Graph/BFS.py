@@ -1,3 +1,16 @@
+'''
+Applications of BFS - 
+    i) Shortest Path in an unweighted graphs
+    ii) Crawerls in seach Engines
+    iii) Peer to peer networks
+    iv) BitTorrent
+    v) Social Netwroking Search
+    vi) In garbage collection
+    vii) Cycle Detection in both directed and undirected graph
+    viii) Ford Fulkerson Algorithm (Max flow algo) used mainly in BFS
+    ix) Broadcasting - (BFS)
+'''
+
 from collections import defaultdict
 class graph:
 
