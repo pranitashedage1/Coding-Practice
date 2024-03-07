@@ -25,3 +25,4 @@ class Solution(object):
             if i + nums[i] >= goal:
                 goal = i
         return True if goal == 0 else False
+print(Solution().canJump([2, 3, 1, 1, 8]))
