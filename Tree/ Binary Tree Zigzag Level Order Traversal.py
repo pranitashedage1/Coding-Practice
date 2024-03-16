@@ -60,4 +60,3 @@ if __name__ == '__main__':
     root.right.left = TreeNode(15)
     root.right.right = TreeNode(7)
     print(Solution().zigzagLevelOrder(root))
-
