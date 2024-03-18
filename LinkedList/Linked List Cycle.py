@@ -11,7 +11,7 @@
 # Output: true
 # Input: head = [1], pos = -1
 # Output: false
-
+from typing import Optional
 def print_linked_list(head):
     current_node = head
     while current_node:
@@ -39,7 +39,7 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def hasCycle(self, head) -> bool:
+    def hasCycle1(self, head) -> bool:
         set1 = set()
         while head:
             if head not in set1:
@@ -48,11 +48,24 @@ class Solution:
                 return True
             head = head.next
         return False
-    
+
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head:
+            return False
+        slow, fast = head, head.next
+        while slow != fast:
+            if fast is None or fast.next is None:
+                return False
+            slow = slow.next
+            fast = fast.next.next
+        return True
+
 s = Solution()
 l1 = list_to_linked_list([1, 3, 6])
-a = s.hasCycle(l1)
+a = s.hasCycle1(l1)
+b = s.hasCycle(l1)
 print(a)
+print(b)
 #  This will only give false as - list_to_linked_list function always gives linked list with 
 #  the last node having next pointer pointint to the null. But this code will work for the 
 #  linked lists having cycle in it.
