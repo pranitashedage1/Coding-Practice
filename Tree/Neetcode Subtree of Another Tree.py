@@ -42,17 +42,16 @@ class TreeNode:
 from typing import Optional
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        # If subtree is null and there is s tree, then return True
+        # If subtree is null then return True
         if not subRoot:
             return True
-        # If above if does not execute means t not empyt and 
-        # now we will check s, If s is null then return True
+        # If above if does not execute means subRoot not empty and 
+        # now we will check s, If Main Tree is null then return False
         if not root:
             return False
-
         
-        # if control comes here means ther s and t and we will check if subtree is in 
-        # the tree, it it return true
+        # if control comes here means there is tree and subTree and we will check if subtree is in 
+        # the tree, if it is then return true
         if self.sameTree(root, subRoot):
             return True
         # If control comes here means it did not work for the parent tree, call it 

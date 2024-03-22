@@ -23,15 +23,15 @@ Example 2:
 Input: root = [5,3,6,2,4,null,null,1], k = 3
 Output: 3
 '''
-# Time complexity: O(H+k)O(H + k)O(H+k), where HHH is a tree height. 
-# This complexity is defined by the stack, which contains at least H+kH + kH+k elements, 
+# Time complexity: O(H+k), where H is a tree height. 
+# This complexity is defined by the stack, which contains at least H+k elements, 
 # since before starting to pop out one has to go down to a leaf. 
-# This results in O(log⁡N+k)O(\log N + k)O(logN+k) for the balanced tree and 
-# O(N+k)O(N + k)O(N+k) for a completely unbalanced tree with all the nodes in the left subtree.
+# This results in O(log⁡N+k)for the balanced tree and 
+# O(N+k)for a completely unbalanced tree with all the nodes in the left subtree.
 
-# Space complexity: O(H)O(H)O(H) to keep the stack, where HHH is a tree height. 
-# That makes O(N)O(N)O(N) in the worst case of the skewed tree, 
-# and O(log⁡N)O(\log N)O(logN) in the average case of the balanced tree.
+# Space complexity: O(H) to keep the stack, where H is a tree height. 
+# That makes O(N)in the worst case of the skewed tree, 
+# and O(log⁡N)in the average case of the balanced tree.
 
 # This can also be solved with the help of inorder traveral, First create a 
 # list wiht inorder traversal then find the (k-1) index.
