@@ -26,7 +26,6 @@ class Solution(object):
         """
         left = 0
         max_length = 0
-        max_length = 0
         set1 = set()
         for right in range(len(s)):
             while s[right] in set1:
