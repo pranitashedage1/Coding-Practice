@@ -21,8 +21,7 @@ Input: grid = [
 Output: 3
 '''
 # Time complexity - O(m*n)
-# Space complexity - O(m*n)
-import collections
+# Space complexity - O(m*n) if all are 1's
 class Solution(object):
     def numIslands(self, grid):
         """
@@ -31,35 +30,21 @@ class Solution(object):
         """
         if not grid:
             return 0
-        
-        rows, cols = len(grid), len(grid[0])
-        visited = set()
-        # Initialize the count of islands = 0
-        islands = 0
-
-        def bfs(r, c):
-            q = collections.deque()
-            visited.add((r,c))
-            q.append((r,c))
-
-            while q:
-                row, col = q.popleft()
-                # for [0, 0 ]- 4 directions
-                # [-1, 0], [0, -1], [0, 1], [1, 0]
-                # From these only valid directions we will choose which are in the grid
-                dicrection = [[-1, 0], [0, -1], [0, 1], [1, 0]]
-                for dr, dc in dicrection:
-                    r, c = row + dr, col + dc
-                    if (r in range(rows) and
-                        c in range(cols) and
-                       grid[r][c] == "1" and 
-                       (r, c) not in visited):
-                        q.append((r,c))
-                        visited.add((r, c))    
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c] == "1" and (r,c) not in visited:
-                    bfs(r,c)
-                    islands += 1
-
-        return islands
+        count = 0
+        self.r = len(grid)
+        self.c = len(grid[0])
+        for i in range(self.r):
+            for j in range(self.c):
+                if grid[i][j] == '1':
+                    self.dfs(grid, i, j)
+                    count += 1
+        return count
+    
+    def dfs(self, grid, i, j):
+            if (i < 0 or j < 0 or i >= self.r or j >= self.c or grid[i][j] == '0'):
+                return
+            grid[i][j] = '0'
+            self.dfs(grid, i+1, j)
+            self.dfs(grid, i, j+1)
+            self.dfs(grid, i-1, j)
+            self.dfs(grid, i, j-1)   
