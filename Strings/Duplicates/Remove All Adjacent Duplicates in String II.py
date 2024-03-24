@@ -42,3 +42,5 @@ class Solution:
             res = (count * charStack.pop()) + res
 
         return res
+
+print(Solution().removeDuplicates('deeedbbcccbdaa', k = 3))

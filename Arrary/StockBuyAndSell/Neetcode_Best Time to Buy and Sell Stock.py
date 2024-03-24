@@ -28,7 +28,7 @@ class Solution(object):
                 if profit > maxProfit:
                     maxProfit = profit
             else:
-                left += 1
+                left = right
             right += 1
         return maxProfit
 

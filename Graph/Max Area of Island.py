@@ -16,26 +16,31 @@ Output: 0
 '''
 # Time complexity - O(m * n)
 # Space complexity - O(m * n)
-
-class Solution(object):
-    def maxAreaOfIsland(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
-        rows, cols = len(grid), len(grid[0])
-        visit = set()
-
-        def dfs(r, c):
-            # If it is not in the range of the matrix, or it 0 or it is already visited then remove
-            if (r < 0 or r == rows or c < 0 or c == cols or
-            grid[r][c] == 0 or (r, c) in visit):
-                return 0
-
-            visit.add((r, c))
-            return (1 + dfs(r+1, c) + dfs(r-1, c) + dfs(r, c+1) + dfs(r, c-1))     
+from typing import List
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        self.rows, self.cols = len(grid), len(grid[0])
         area = 0
-        for r in range(rows):
-            for c in range(cols):
-                area = max(area, dfs(r, c))
+        self.directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if grid[i][j] == 1:
+                    area = max(area, self.dfs(grid, i, j))
+        
         return area
+    
+    def dfs(self, grid, i, j):
+            if (i < 0 or j < 0 or i >= self.rows or j >= self.cols or grid[i][j] == 0):
+                return 0
+            
+            grid[i][j] = 0
+            sum = 1
+            for dir in self.directions:
+                x = i + dir[0]
+                y = j + dir[1]
+                sum += self.dfs(grid, x, y)
+
+            # after that we have to add 1 for the current cell to the sum
+            return sum
