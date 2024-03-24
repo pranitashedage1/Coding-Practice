@@ -18,16 +18,18 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
 '''
 class Solution(object):
-    def climbStairs(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        one , two = 1, 1
-        for i in range(n-1, 0, -1):
-            temp = one
-            one = one + two
-            two = temp 
-        return one
+   def climbStairs(self, n):
+       """
+       :type n: int
+       :rtype: int
+       """
+       memo = {}
+       return self.helper(n, memo)
 
-print(Solution().climbStairs(3))
+   def helper(self, n, memo):
+       if n == 0 or n == 1:
+           return 1
+       if n not in memo:
+           memo[n] = self.helper(n-1, memo) + self.helper(n-2, memo)
+       return memo[n]
+

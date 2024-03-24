@@ -5,4 +5,8 @@
 
 test1 = ('a', 'b', 'c')
 test2 = ('c', 'b', 'a')
-print(test1 == test2)
+
+dict1 = {('a', 'b', 'c'):['abc']}
+print(dict1)
+dict1['c', 'b', 'a'].append('cba')
+print(dict1)
