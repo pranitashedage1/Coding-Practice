@@ -3,6 +3,6 @@
 # a = min(list1, key = lambda x: x[1])
 # print(a)
 
-test1 = {1: 45, 3:46}
-test1.pop(1)
-print(test1)
+test1 = ('a', 'b', 'c')
+test2 = ('c', 'b', 'a')
+print(test1 == test2)
