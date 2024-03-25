@@ -21,22 +21,27 @@ Example 3:
 Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
 Output: false
 '''
-class Solution(object):
-    def wordBreak(self, s, wordDict):
-        """
-        :type s: str
-        :type wordDict: List[str]
-        :rtype: bool
-        """
-        dp = [False] * (len(s) + 1)
-        dp[len(s)] = True
-        for i in range(len(s) - 1, -1, -1):
-            for w in wordDict:
-                if(i + len(w)) <= len(s) and s[i : i + len(w)] == w:
-                    dp[i] = dp[i + len(w)]
-                if dp[i]:
-                    break
+from typing import List
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        self.memo = [-1] * len(s)
+        self.dict = set(wordDict)
+        return self.dfs(s, 0)
 
-        return dp[0]
+    def dfs(self, s: str, start: int) -> bool:
+        if start == len(s):
+            return True
 
+        if self.memo[start] != -1:
+            return self.memo[start] == 1
+
+        for end in range(start + 1, len(s) + 1):
+            if s[start:end] in self.dict:
+                if self.dfs(s, end):
+                    self.memo[start] = 1
+                    return True
+
+        self.memo[start] = 0
+        return False
+    
 print(Solution().wordBreak('catsandog', ["cats","dog","sand","and","cat"]))
