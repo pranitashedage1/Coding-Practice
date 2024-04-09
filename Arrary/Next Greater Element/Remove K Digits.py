@@ -16,18 +16,15 @@ Output: "0"
 Explanation: Remove all the digits from the number and it is left with nothing which is 0.
 '''
 from collections import deque
-
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
         length = len(num)
-        
         # corner case
         if k == length:
             return "0"
         
         stack = deque()
         i = 0
-        
         while i < len(num):
             # whenever meet a digit which is less 
             # than the previous digit, discard 
@@ -42,12 +39,11 @@ class Solution:
         while k > 0:
             stack.pop()
             k -= 1
-        
+            
         # construct the number from the stack
-        result = "".join(stack[::-1])
+        result = ''.join(stack)
         
         # remove all the 0 at the head
         while len(result) > 1 and result[0] == '0':
-            result = result[1:]
-        
+            result = result[1:]      
         return result
