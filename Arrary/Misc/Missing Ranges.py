@@ -45,6 +45,5 @@ class Solution(object):
 
         # check for any missing numbers between the last element of nums and the upper bound
         if upper > nums[n-1]:
-            missing_ranges.append([nums[n - 1] + 1, upper])
-        
+            missing_ranges.append([nums[n - 1] + 1, upper])     
         return missing_ranges
