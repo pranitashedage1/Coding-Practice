@@ -17,7 +17,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        # By swaping - testcase - [1,0,3,0,12]
+        # By swapping - testcase - [1,0,3,0,12]
         # snowball = 0
         # for i in range(len(nums)):
         #     if nums[i] != 0:
@@ -25,7 +25,7 @@ class Solution(object):
         #     else:
         #         snowball += 1
 
-        # By swaping - testcase - [1,0,3,0,12] - for this testcase, for the first index, 1 is getting swap with itself only. This can be avoided by below test case.
+        # By swapping - testcase - [1,0,3,0,12] - for this testcase, for the first index, 1 is getting swap with itself only. This can be avoided by below test case.
         # snowball = 0
         # for i in range(len(nums)):
         #     if nums[i] != 0 and snowball != 0:
