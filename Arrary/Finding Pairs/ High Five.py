@@ -44,4 +44,3 @@ class Solution:
             avg.append([student_id, sum_of_5//5])
 
         return avg
-
