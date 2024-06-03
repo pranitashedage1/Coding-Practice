@@ -22,12 +22,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        maxSum = nums[0]
-        currSum = 0
-
-        for n in nums:
-            if currSum < 0:
-                currSum = 0
-            currSum += n
+        # Initilaize our variables using the first element.
+        maxSum, currSum = nums[0], nums[0]
+        # Start with the second element since we already used the first one
+        for num in nums[1:]:
+            #  If currentSum is negative, throw is away. Otherwsie keep adding to it.
+            currSum = max(num, currSum + num)
             maxSum = max(maxSum, currSum)
         return maxSum
