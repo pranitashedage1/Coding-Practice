@@ -3,7 +3,10 @@ Amazon Web Services (AWS) has several processors for executing processes schedul
 
 In order to maintain logical independence, a process is divided into segments. Each segment has two characteristics: the segment size (1 ≤ segment size ≤ 10⁹), and a pointer to the next segment so that the sequential order of execution is maintained within a process. Hence, this structure can be visualized as a linked list.
 
-Given the segment structure of a process as a linked list, find the longest sub-list which has the segment sizes in non-increasing order. A sub-list of length 1 is always a valid sub-list. If there are multiple sub-lists of maximum length, return the sub-list which occurs earliest.
+Given the segment structure of a process as a linked list, 
+find the longest sub-list which has the segment sizes in non-increasing order. 
+A sub-list of length 1 is always a valid sub-list.
+If there are multiple sub-lists of maximum length, return the sub-list which occurs earliest.
 
 Note:
 A sub-list is obtained by removing some nodes from the head and some nodes from the tail of the linked list.

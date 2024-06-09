@@ -13,7 +13,9 @@ int : the minimum number of operations required to produce a reverse, i.e., to r
 Example 1 :
 Input: image = "0100110"
 Output: 3 
-Explanation: The reverse of the image, i.e., the reverse of the string, is "0110010", and it can be produced using the sequence of operations shown in the image above : The string cannot be reversed in fewer than 3 operations. Return 3.
+Explanation: The reverse of the image, i.e., the reverse of the string, is "0110010", 
+and it can be produced using the sequence of operations shown in the image above : 
+The string cannot be reversed in fewer than 3 operations. Return 3.
 
 '''
 def findMinimumOperations(image: str) -> int:
@@ -30,5 +32,15 @@ def findMinimumOperations(image: str) -> int:
     return n - j
 
 # Example usage
-image = "0100110"
-print(findMinimumOperations(image))  # Output: 3
+# image = "0100110"
+# print(findMinimumOperations(image))  # Output: 3
+
+
+image = "1100"
+print(findMinimumOperations(image))  # Output: 2
+
+# image = "1111"
+# print(findMinimumOperations(image))  # Output: 0
+
+# image = "1101"
+# print(findMinimumOperations(image))  # Output: 2
