@@ -6,6 +6,7 @@ Example 1 :
 Input: power = [3, 4, 1, 6, 2]
 Output: 7 
 Explanation: Add 3 units to the subarray [2, 4] and 4 units to the subarray [4, 4,]. 
+ans after adding first 3 into index [2, 4] > [3, 4, 4, 9, 5]
 The final arrangement of the server is: [3, 4, 4, 9, 9]. The ans is 3 + 4 = 7. 
 (As shown in the image) 
 
@@ -13,14 +14,28 @@ Constraints:
 1 <= n <= 105
 1 <= power[i] <= 109
 '''
+# def makePowerNonDecreasing(power):
+#     n = len(power)
+#     total_increament = 0
+#     for i in range(1, n):
+#         if power[i] < power[i-1]:
+#             increament = power[i-1] - power[i]
+#             power[i] += increament
+#             total_increament += increament
+#     return total_increament
+
+
 def makePowerNonDecreasing(power):
     n = len(power)
     total_increament = 0
-    for i in range(1, n):
+    i = 1
+    while i < n:
         if power[i] < power[i-1]:
             increament = power[i-1] - power[i]
-            power[i] += increament
+            for j in range(i, n):
+                power[j] += increament
             total_increament += increament
+        i += 1
     return total_increament
 
 # Example usage:

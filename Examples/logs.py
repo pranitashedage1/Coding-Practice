@@ -15,6 +15,9 @@ The list of user ids should be ordered in ascending numeric value
 size n = 4;
 logs[] = ["1 2 50", "1 7 70", "1 3 20", "2 2 17"]
 threshold = 2
+Ouput:
+1
+2
 
 size n = 4;
 logs[] = ["9 7 50", "22 7 20", "33 7 50", "22 7 30"]
@@ -25,6 +28,7 @@ def logsfunction(logs, threshold):
     result = {}
     test = []
     logs_entries = [(entry[0].split(' ')) for entry in [s.split(',') for s in logs]]
+    print("log entries", logs_entries)
     for log in logs_entries:
         log.pop() 
         if log[0] == log[1]:
@@ -38,14 +42,14 @@ def logsfunction(logs, threshold):
                 result[log] = result.get(log) + 1
             if log not in test and result[log] >= threshold:
                 test.append(log)
-    print(logs_entries)
-    print(result)
+    # print(logs_entries)
+    # print(result)
     test.sort()
     return test
 
 logs = ["1 2 50", "1 7 70", "1 3 20", "2 2 17"]
 threshold = 2
-logs = ["9 7 50", "22 7 20", "33 7 50", "22 7 30"]
-threshold = 3
+# logs = ["9 7 50", "22 7 20", "33 7 50", "22 7 30"]
+# threshold = 3
 a = logsfunction(logs, threshold)
 print(a)
