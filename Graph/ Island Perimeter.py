@@ -16,6 +16,7 @@ Example 3:
 Input: grid = [[1,0]]
 Output: 4
 '''
+from typing import List
 class Solution:
 
     def islandPerimeter(self, grid: List[List[int]]) -> int:
@@ -34,4 +35,3 @@ class Solution:
                         if (x < 0 or x >= rows or y < 0 or y >= cols or grid[x][y] == 0):
                             perimeter += 1          
         return perimeter
-

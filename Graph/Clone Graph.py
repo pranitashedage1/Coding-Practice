@@ -30,31 +30,31 @@ Input: adjList = []
 Output: []
 Explanation: This an empty graph, it does not have any nodes.
 '''
-# Time complexity - O(n) > V + E
-# Space complexity - O(v) > V is number of nodes
 
-class Node(object):
+# Definition for a Node.
+class Node:
     def __init__(self, val = 0, neighbors = None):
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
 
-class Solution(object):
-    def cloneGraph(self, node):
-        """
-        :type node: Node
-        :rtype: Node
-        """
-        oldToNew = {}
+import collections
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node:
+            return None
+        relations = {}
+        queue = collections.deque()
+        relations[node] = Node(node.val)
+        queue.append(node)
+        while queue:
+            original = queue.popleft()
+            for neighbor in original.neighbors:
+                if neighbor not in relations:
+                    queue.append(neighbor)
+                    relations[neighbor] = Node(neighbor.val)
+                
+                clone = relations[original]
+                clone_neighbor = relations[neighbor]
+                clone.neighbors.append(clone_neighbor)
+        return relations[node]
 
-        def dfs(node):
-            if node in oldToNew:
-                return oldToNew[node]
-            
-            copy = Node(node.val)
-            oldToNew[node] = copy
-
-            for nei in node.neighbors:
-                copy.neighbors.append(dfs(nei))
-            return copy
-
-        return dfs(node) if node else None

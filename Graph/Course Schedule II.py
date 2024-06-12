@@ -22,33 +22,47 @@ Output: [0]
 from collections import defaultdict
 from typing import List
 from collections import deque
+
 class Solution:
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        # Creating a dict to present the map
-        adj_list = defaultdict(list)
-        for prev in prerequisites:
-            adj_list[prev[1]].append(prev[0])
-        
-        # Creating in_degree for each vertices
-        in_degree = [0] * numCourses
-        for pre in prerequisites:
-            in_degree[pre[0]] += 1
-        # initilizing count 
-        count = 0
-        top_order = []
-        q = deque()
+    def findOrder(self, numCourses: int, prereq: List[List[int]]) -> List[int]:
+        res = []
+        graph = defaultdict(list)
+        indegree = defaultdict(int)
+
+        # init topo map & indegree
         for i in range(numCourses):
-            if in_degree[i] == 0:
-                q.append(i)
-        while q:
-            u = q.popleft()
-            top_order.append(u)
+            indegree[i] = 0
+            graph[i] = []
+
+        # build topo map & indegree
+        for curr, prev in prereq:
+            indegree[curr] += 1
+            graph[prev].append(curr)
+
+        queue = deque()
+
+        # add all the indegree=0 to queue
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                queue.append(i)
+
+        # maintain count/flag to check cycle
+        count = 0
+        while queue:
+            prev = queue.popleft()
+            res.append(prev)
             count += 1
-            for v in adj_list[u]:
-                in_degree[v] -= 1
-                if in_degree[v] == 0:
-                    q.append(v)
+            for curr in graph[prev]:
+                indegree[curr] -= 1
+                # indegree will act as a visited list. We will visit the node again till the indegree is 0
+                if indegree[curr] == 0:
+                    queue.append(curr)
+
+        # check for cycle if there is cycle count < numCourses
         if count == numCourses:
-            return top_order
+            # return resL
+            return res
         else:
             return []
+        
+print(Solution().findOrder(2, [[1, 0]]))
