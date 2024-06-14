@@ -45,7 +45,6 @@ class TreeNode:
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         curr = root
-
         while curr:
             # If both p and q are greater than root. go to the right
             if p.val > curr.val and q.val > curr.val:
@@ -55,7 +54,22 @@ class Solution:
                 curr = curr.left
             # p is on one side and q on one side, then return root
             else:
-                return curr.val
+                return curr
+
+class Solution1(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if (p.val < root.val and q.val < root.val):
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif(p.val > root.val and q.val > root.val):
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
 
 if __name__ =='__main__':
     #  create a Node

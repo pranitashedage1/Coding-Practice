@@ -19,6 +19,7 @@ Output: []
 '''
 # Definition for a binary tree node.
 from collections import deque
+# Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -36,9 +37,11 @@ class Solution(object):
         q.append(root)
         output = []
         count = 0
+        zigzag = False
         while q:
             qLen = len(q)
             level = []
+
             for i in range(len(q)):
                 node = q.popleft()
                 if node:
@@ -46,12 +49,13 @@ class Solution(object):
                     q.append(node.left)
                     q.append(node.right)
             if level:
-                if count % 2 != 0:
+                if zigzag:
                     output.append(level[::-1])
                 else:
                     output.append(level)
-            count += 1
+                zigzag = not zigzag
         return output
+
 
 if __name__ == '__main__':
     root = TreeNode(3)

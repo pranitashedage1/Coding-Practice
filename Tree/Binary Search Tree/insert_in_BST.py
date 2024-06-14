@@ -3,11 +3,14 @@
 #  Auxiliary Space by Recursion - O(h)
 #  Auxiliary space by iteration - O(1)
 # Binary Tree Implementation:
+
 class Node:
     def __init__(self, key, left=None, right=None) -> None:
         self.data = key
         self.left = left
         self.right = right
+
+    
 # Recursion
 def insert_in_binary_search_tree(node, n):
     if node == None:
@@ -39,7 +42,6 @@ def insert_in_binary_search_tree_iterative(node, n):
         parent.left = temp
     return node
 
-
 if __name__ =='__main__':
     #  create a Node
     root = Node(15)
@@ -53,4 +55,14 @@ if __name__ =='__main__':
     print(a)
     b = insert_in_binary_search_tree_iterative(root, 3)
     print(b)
-    
+    c = insert_in_binary_search_tree_iterative(root, 5)
+    print(c)
+
+def inorderTraversal(node):
+    if not node:
+        return None
+    inorderTraversal(node.left)
+    print(node.data, end=" ")
+    inorderTraversal(node.right)
+
+inorderTraversal(root)
