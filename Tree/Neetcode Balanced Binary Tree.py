@@ -91,8 +91,7 @@ class Solution:
             balanced = (left[0] and right[0] and abs(left[1] - right[1]) <= 1)
             return [balanced, max(left[1], right[1]) + 1]
         return dfs(root)[0]
-        
-        pass
+
 if __name__ =='__main__':
     #  create a Node
     root = TreeNode(3)
