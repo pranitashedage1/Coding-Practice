@@ -17,33 +17,36 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        # First approach using heap
-        # # Total time complexity - O(n + k log n)
-        # heapq.heapify(nums) # time complexity - O(n)
-        # return heapq.nlargest(k, nums)[-1] # Time complexity - O(k log n)
+#         # First approach using heap
+#         heapq.heapify(nums) 
+#         return heapq.nlargest(k, nums)[-1]
 
-        # Second apprach using quick select
-        # Time complexity - Average case - O(n^2)
-        # Time complexity - Worst Case - O(n^2)
+# Second approach
+        if len(nums) == 1:
+            return nums[0]
+        left = 0
+        right = len(nums) - 1
         k = len(nums) - k
-
-        def quickSelect(l, r):
-            pivot, p = nums[r], l
-            for i in range(l, r):
-                if nums[i] <= pivot:
-                    nums[p], nums[i] = nums[i], nums[p]
-                    p += 1
-            nums[p], nums[r] = pivot, nums[p]
-
-            if p > k:
-                # number will be on the right side
-                return quickSelect(l, p-1)
-            elif p < k:
-                # number is on the left side
-                return quickSelect(p+1, r)
+        
+        while left <= right:
+            ptr = self.partition(nums, left, right)
+            if ptr < k:
+                left = ptr + 1
+            elif ptr > k:
+                right = ptr - 1
             else:
-                return nums[p]
+                return nums[ptr]
+        return 0
 
-        return quickSelect(0, len(nums)-1)
-
+    def partition(self, nums, left, right):
+        pivot = nums[right]
+        p = left
+        for i in range(left, right):
+            if nums[i] <= pivot:
+                if p != i:
+                    nums[p], nums[i] = nums[i], nums[p]
+                p += 1
+        nums[right], nums[p] = nums[p], nums[right]
+        return p
+    
 print(Solution().findKthLargest([3,2,1,5,6,0,4], 2))
