@@ -25,29 +25,25 @@ medianFinder.addNum(3);    // arr[1, 2, 3]
 medianFinder.findMedian(); // return 2.0
 '''
 import heapq
-class MedianFinder(object):
+class MedianFinder:
 
     def __init__(self):
+        # Initialized two heaps - small is acutally maxHeap and
+        # large is minHeap
         self.small, self.large = [], []
 
-    def addNum(self, num):
-        """
-        :type num: int
-        :rtype: None
-        """
-        # Small heap is acutally a maxHeap. So, multiply by one
-        if self.large and num > self.large[0]:
-            heapq.heappush(self.large, num)
-        else:
-            heapq.heappush(self.small, -1 * num)
-        
-        # Make sure all elements from small heap are less than large heap
-        if (self.small and self.large and 
-        (-1 * self.small[0]) > self.large[0]):
+
+    def addNum(self, num: int) -> None:
+        # you can push num to any heap, here i am pushing it in the small heap,
+        # While pushing multiply the num with -1 as we are pushing it in maxHeap
+        heapq.heappush(self.small, -1 * num)
+
+        # Make sure, every element in small heap is <= every num in large
+        if self.small and self.large and (-1 * self.small[0]) > self.large[0]:
             val = -1 * heapq.heappop(self.small)
             heapq.heappush(self.large, val)
 
-        # Uneven size ?
+        # What if size is uneven?
         if len(self.small) > len(self.large) + 1:
             val = -1 * heapq.heappop(self.small)
             heapq.heappush(self.large, val)
@@ -55,16 +51,13 @@ class MedianFinder(object):
             val = heapq.heappop(self.large)
             heapq.heappush(self.small, -1 * val)
 
-    def findMedian(self):
-        """
-        :rtype: float
-        """
+    def findMedian(self) -> float:
+        if len(self.small) > len(self.large):
+            return -1 * self.small[0]
         if len(self.large) > len(self.small):
             return self.large[0]
-        elif len(self.large) < len(self.small):
-            return (-1 * self.small[0])
-        else:
-            return ((-1 * self.small[0]) + self.large[0])/2.0
+        return ((-1*self.small[0]) + self.large[0])/2.0   
+        
 
 # Your MedianFinder object will be instantiated and called as such:
 # obj = MedianFinder()
