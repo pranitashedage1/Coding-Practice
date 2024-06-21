@@ -17,23 +17,27 @@ Explanation: The answer is "wke", with the length of 3.
 Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 '''
 # Time complexity - O(n)
-# Space Complexity - O(k) where k is the size of set
-class Solution(object):
+# Space Complexity - O(1) where k is the size of set
+class Solution:
     def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        left = 0
-        max_length = 0
-        set1 = set()
-        for right in range(len(s)):
-            while s[right] in set1:
-                set1.remove(s[left])
-                left += 1
-            set1.add(s[right])
-            max_length = max(max_length, right-left+1)
-            right += 1
-        return max_length
+        start = 0
+        end = 0
+        freq_count = {}
+        count = 0
+        maxLength = 0
+        while end < len(s):
+            char = s[end]
+            freq_count[char] = freq_count.get(char, 0) + 1
+            if freq_count[char] > 1:
+                count += 1
+            end += 1
+            while count > 0:
+                temp = s[start]
+                start += 1
+                if freq_count[temp] > 1:
+                    count -= 1
+                freq_count[temp] -= 1
+            maxLength = max(maxLength, end - start)
+        return maxLength
 
 print(Solution().lengthOfLongestSubstring('abcabcbb'))
