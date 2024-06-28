@@ -23,24 +23,18 @@ Output: "ps"
 '''
 class Solution:
     def removeDuplicates(self, s: str, k: int) -> str:
-        # Create a two stack - one for char and one for freq
-        charStack = []
-        freqStack = []
-        for i in s:
-            if not charStack or charStack[-1] != i:
-                charStack.append(i)
-                freqStack.append(1)
-            elif freqStack[-1] + 1 < k:
-                freqStack.append(freqStack.pop()+1)
+        stack = []
+        for char in s:
+            if not stack or stack[-1][0] != char:
+                stack.append([char, 1])
             else:
-                charStack.pop()
-                freqStack.pop()
-        
-        res = ''
-        while charStack:
-            count = freqStack.pop()
-            res = (count * charStack.pop()) + res
+                stack[-1][1] += 1
+                if stack[-1][1] == k:
+                    stack.pop()
+        result = []
+        for char, count in stack:
+            result.append(count * char)
 
-        return res
+        return ''.join(result)
 
 print(Solution().removeDuplicates('deeedbbcccbdaa', k = 3))
