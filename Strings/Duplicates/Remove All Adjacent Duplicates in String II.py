@@ -28,9 +28,10 @@ class Solution:
             if not stack or stack[-1][0] != char:
                 stack.append([char, 1])
             else:
-                stack[-1][1] += 1
-                if stack[-1][1] == k:
+                if stack[-1][1] + 1 == k:
                     stack.pop()
+                else:
+                    stack[-1][1] += 1
         result = []
         for char, count in stack:
             result.append(count * char)
