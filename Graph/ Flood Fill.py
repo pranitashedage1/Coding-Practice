@@ -21,5 +21,26 @@ Example 2:
 Input: image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0
 Output: [[0,0,0],[0,0,0]]
 Explanation: The starting pixel is already colored 0, so no changes are made to the image.
-
 '''
+class Solution(object):
+    def floodFill(self, image, sr, sc, color):
+        """
+        :type image: List[List[int]]
+        :type sr: int
+        :type sc: int
+        :type color: int
+        :rtype: List[List[int]]
+        """
+        if image[sr][sc] != color:
+            self.dfs(image, image[sr][sc], sr, sc, color)
+        return image
+
+    def dfs(self, image, color, sr, sc, newColor):
+        if sr < 0 or sc < 0 or sr >= len(image) or sc >= len(image[0]) or image[sr][sc] != color:
+            return
+        
+        image[sr][sc] = newColor
+        self.dfs(image, color, sr + 1, sc, newColor)
+        self.dfs(image, color, sr - 1, sc, newColor)
+        self.dfs(image, color, sr, sc + 1, newColor)
+        self.dfs(image, color, sr, sc - 1, newColor)
