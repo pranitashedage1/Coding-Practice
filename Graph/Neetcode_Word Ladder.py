@@ -19,41 +19,33 @@ Explanation: The endWord "cog" is not in wordList, therefore there is no valid t
 '''
 import collections
 from collections import deque
-class Solution(object):
-    def ladderLength(self, beginWord, endWord, wordList):
-        """
-        :type beginWord: str
-        :type endWord: str
-        :type wordList: List[str]
-        :rtype: int
-        """
-        if endWord not in wordList:
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        queue = deque()
+        visited = set()
+
+        wordListSet = set(wordList)
+        if endWord not in wordListSet:
             return 0
 
-        nei = collections.defaultdict(list)
-        wordList.append(beginWord)
-        # Create a adjacency list of patterns for every word
-        for word in wordList:
-            for j in range(len(word)):
-                pattern = word[:j] + "*" + word[j+1:]
-                nei[pattern].append(word)
-        
-        visit = set([beginWord])
-        q = deque([beginWord])
-        # Initially we have at least one word, so len will be 1
-        res = 1
-        while q:
-            for i in range(len(q)):
-                word = q.popleft()
-                if word == endWord:
-                    return res
-                # Get a neighbours of the word
-                for j in range(len(word)):
-                    # We will again find the pattern of the word.
-                    pattern = word[:j] + "*" + word[j+1:]
-                    for neiWord in nei[pattern]:
-                        if neiWord not in visit:
-                            visit.add(neiWord)
-                            q.append(neiWord)
-            res += 1
+        queue.append(beginWord)
+        k = 0
+
+        while queue:
+            k += 1
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if node == endWord:
+                    return k
+                self.getNeighs(node, wordListSet, queue, visited)
         return 0
+
+    def getNeighs(self, word: str, wordList: set, queue: deque, visited: set) -> None:
+        for i in range(len(word)):
+            for c in 'abcdefghijklmnopqrstuvwxyz':
+                if word[i] == c:
+                    continue
+                next_word = word[:i] + c + word[i + 1:]
+                if next_word in wordList and next_word not in visited:
+                    queue.append(next_word)
+                    visited.add(next_word)
