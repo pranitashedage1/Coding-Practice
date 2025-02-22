@@ -78,3 +78,23 @@ class Solution1(object):
         for num in res:
             output.append(num[1])
         return output
+
+
+# Bucket Sort - 
+# Create a list whose index represents the frequency - 
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        self.counter = Counter(nums)
+        freq_list = [[] for i in range(len(nums))]
+        for key,value in self.counter.items():
+            freq_list[value-1].append(key)
+        
+        count = 0
+        output = []
+        for i in range(len(nums)-1, -1, -1):
+            if freq_list[i] and count < k:
+                for num in freq_list[i]:
+                    output.append(num)
+                    count += 1
+        return output
