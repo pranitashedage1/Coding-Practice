@@ -21,3 +21,28 @@ Constraints:
 1 <= s1.length, s2.length <= 104
 s1 and s2 consist of lowercase English letters.
 '''
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        l, r = 0, 0
+        firstMap = Counter(s1)
+        count = len(firstMap)
+        while r < len(s2):
+            char = s2[r]
+            if char in s1:
+                firstMap[char] -= 1
+                if firstMap[char] == 0:
+                    count -= 1
+            r += 1
+            
+            while count == 0:
+                if (r - l) == len(s1):
+                    return True
+                ch = s2[l]
+                if ch in firstMap:
+                    firstMap[ch] += 1
+                    if firstMap[ch] > 0:
+                        count += 1
+                l += 1
+
+        return False
+
