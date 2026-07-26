@@ -19,7 +19,6 @@ class Solution(object):
         """
         rows, cols = len(board), len(board[0])
 
-        # 1. (DFS)capture unsurronded regions (O -> T)
         def capture(r, c):
             if (r < 0 or c < 0 or r == rows or c == cols or
             board[r][c] != 'O'):
@@ -30,19 +29,21 @@ class Solution(object):
             capture(r, c+1)
             capture(r, c-1)
 
+
+        # 1 - conver all O Which are on border To T and its nearby O by using dfs
         for r in range(rows):
             for c in range(cols):
                 if (board[r][c] == 'O' and
                 r in [0, rows-1] or c in [0, cols-1]):
                     capture(r, c)
 
-        # 2. capture surrounded regions (O -> X)
+        # 2 - convert all O to T which are surronding with X. These O are not from border as they are already converted
         for r in range(rows):
             for c in range(cols):
                 if board[r][c] == 'O':
                     board[r][c] = 'X'
 
-        # 3. uncapture unsurronded regions (T -> O)
+        # 3 - convert T back to O which were on border
         for r in range(rows):
             for c in range(cols):
                 if board[r][c] == 'T':
