@@ -36,49 +36,53 @@ class Solution:
     def reorderList(self, head) -> None:
         """
         Do not return anything, modify head in-place instead.
+
+        1 2 3 4 None
         """
+        slow,fast=head,head
 
-        # Find the middle point of the linked List
-
-        slow = head
-        fast = head
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        # reverse the second list
-        prev = None
-        current_node = slow
-        while(current_node):
-            temp_node = current_node.next
-            current_node.next = prev
-            prev = current_node
-            current_node = temp_node
-
-            # alternatively
-            # current_node.next, prev, current_node = prev, current_node, current_node.next
+            fast=fast.next.next
+            slow=slow.next
         
-        # return head, prev
+        """
+          s
+        1 2 3 4 None
+        Assign slow.next to second to get  second part of list
 
-        # merge the two lists 
-        #  1, 2, 3
-        #  5, 4, 3
-        first = head
-        second = prev
+                  second
+        1 2 -None 3 4 None
+        Make sure to end the first half by marking its last node.next as None
+        ie to cut both the lists
+        If we dont it will go into infinite loop
+        """
+        second=slow.next
+        slow.next = None
 
-        while(second.next):
-            temp = first.next
-            first.next = second
-            first = temp
+        prev=None
+        tempHead=second
+        # slow.next = None
 
-            temp = second.next
-            second.next = first
-            second = temp
+        while tempHead:
+            nextNode = tempHead.next
+            tempHead.next=prev
+            prev=tempHead
+            tempHead = nextNode
+        
+        h1,h2=head,prev
+        while h2:
+            h1next=h1.next
+            h2next=h2.next
 
-            #  we can write below code alternatively
-            # first.next, first = second, first.next
-            # second.next, second= first, second.next
+            h1.next=h2
+            h2.next=h1next
+
+            h1=h1next  
+            h2=h2next       
 
         return head
+        
+        
 
 l1 = list_to_linked_list([1, 2, 3, 4, 5, 6])
 print_linked_list(l1)
